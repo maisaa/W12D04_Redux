@@ -1,11 +1,16 @@
-const initialState = {
-    tokens: [
-        {token: ""}
-    ]
-}
+const initialState = {token: ""}
+    
+
 
 const loginReducers = ( state = initialState, {type, payload}) =>{
-    return { tokens:[...payload]};
+
+    switch (type) {
+        case 'SET_Token':
+            return { token: payload};
+            
+        default:
+            return state;
+    }
 };
 
 export default loginReducers;
