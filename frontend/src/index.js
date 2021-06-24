@@ -4,8 +4,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 
 //context providers
-import store from './reducer';
-import Provider from 'react-redux';
+import store from './reducer/index';
+import {Provider} from 'react-redux';
 // import RegisterProvider from './context/register';
 // import LoginProvider from './context/login';
 // import NewArticleProvider from './context/newArticle';

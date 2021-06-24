@@ -32,6 +32,6 @@ export const createNewArticle = (newArticle)=>{
 export const updateArticle = (article)=>{
     return { type:'UPDATE_ARTICLES', payload: article};
 }
-export const deleteArticle = (articleId)=>{
-    return { type:'DELETE_ARTICLES', payload: articleId};
+export const deleteArticle = (article)=>{
+    return { type:'DELETE_ARTICLES', payload: article};
 }

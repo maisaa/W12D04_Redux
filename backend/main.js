@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./db/db.js');
 require('dotenv').config();
+const cors = require('cors')
 
 //routers
 const articlesRouter = require('./routers/routes/articles');
@@ -11,8 +12,10 @@ const roleRouter = require('./routers/routes/role');
 
 const app = express();
 
+
 //built-in middlewares
 app.use(express.json());
+app.use(cors())
 
 // router middleware
 app.use('/users', usersRouter);
@@ -21,7 +24,7 @@ app.use(authRouter);
 app.use(commentsRouter);
 app.use(roleRouter);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
 	console.log(`server on ${PORT}`);
 });

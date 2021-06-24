@@ -1,12 +1,38 @@
-import React, { useContext } from 'react';
-import { RegisterContext } from './../context/register';
+import React, {  useState } from 'react';
+// import { RegisterContext } from './../context/register';
+import axios from 'axios';
 
 const Register = () => {
-	const registerContext = useContext(RegisterContext);
+	// const registerContext = useContext(RegisterContext);
 
-	const handleSubmit = (e) => {
+
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [age, setAge] = useState(0);
+	const [counrty, setCountry] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [role, setRole] = useState('60a881b61c678a049ca406fe');
+	const [message, setMessage] = useState('');
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		registerContext.addNewUser();
+		try {
+			const res = await axios.post('http://localhost:5000/users', {
+				firstName,
+				lastName,
+				age,
+				counrty,
+				email,
+				password,
+				role,
+			});
+			console.log("....res front..",res.data);
+
+			setMessage('The user has been created successfully');
+		} catch (error) {
+			setMessage('Error happened while register, please try again');
+		}
 	};
 
 	return (
@@ -15,37 +41,37 @@ const Register = () => {
 				<input
 					type="text"
 					placeholder="firstName here"
-					onChange={(e) => registerContext.setFirstName(e.target.value)}
+					onChange={(e) => setFirstName(e.target.value)}
 				/>
 				<input
 					type="text"
 					placeholder="lastName here"
-					onChange={(e) => registerContext.setLastName(e.target.value)}
+					onChange={(e) => setLastName(e.target.value)}
 				/>
 				<input
 					type="number"
 					placeholder="age here"
-					onChange={(e) => registerContext.setAge(e.target.value)}
+					onChange={(e) => setAge(e.target.value)}
 				/>
 				<input
 					type="text"
 					placeholder="country here"
-					onChange={(e) => registerContext.setCountry(e.target.value)}
+					onChange={(e) => setCountry(e.target.value)}
 				/>
 				<input
 					type="email"
 					placeholder="email here"
-					onChange={(e) => registerContext.setEmail(e.target.value)}
+					onChange={(e) => setEmail(e.target.value)}
 				/>
 				<input
 					type="password"
 					placeholder="password here"
-					onChange={(e) => registerContext.setPassword(e.target.value)}
+					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<button>Register</button>
 			</form>
 
-			{registerContext.message && <div>{registerContext.message}</div>}
+			{message && <div>{message}</div>}
 		</>
 	);
 };
